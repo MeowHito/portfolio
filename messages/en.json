@@ -49,11 +49,11 @@
     "result": "Result",
     "features": "Features",
     "racetime": {
-      "title": "RACETIME — Real-time RFID Results",
-      "tag": "Real-time results platform for running events",
-      "desc": "A live timing dashboard that turns RFID chip reads into instant results the moment a runner crosses the finish line. Organizers manage events and categories; runners and spectators search by bib or name, watch leaderboards update in real time, and switch between Thai/English and light/dark themes.",
+      "title": "Live.action — Real-time RFID Results",
+      "tag": "New-generation RFID timing for running events",
+      "desc": "Action's live results site. The home page lists every event with its location, date and per-distance start and cut-off times. RFID chip reads become results the moment a runner crosses the mat, so runners and spectators can search by bib or name and watch the leaderboard update in real time.",
       "problem": "Results used to be published hours after the race.",
-      "solution": "Ingest RFID reader data, compute net/gun time and rankings per category, and push updates to the browser without a refresh.",
+      "solution": "A NestJS API ingests RFID reader data into MongoDB, computes net/gun time and rankings per category, and pushes updates to the Next.js front end without a refresh. Deployed on AWS.",
       "result": "Used in production for Action's events in 2026.",
       "featureList": [
         "Event listing",

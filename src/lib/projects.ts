@@ -28,8 +28,8 @@ export const projects: Project[] = [
     liveUrl: "https://live.action.in.th",
     year: 2026,
     accent: "mint",
-    tech: ["Next.js", "TypeScript", "WebSocket/SSE", "PostgreSQL", "AWS EC2", "RFID"],
-    shots: 0,
+    tech: ["Next.js", "NestJS", "MongoDB", "AWS", "RFID"],
+    shots: 1,
   },
   {
     key: "race",
