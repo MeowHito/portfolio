@@ -1,26 +1,312 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
+/* ------------------------------------------------------------------
+   Design tokens — the single source of truth for color, type, spacing.
+   Mirrored in src/lib/tokens.ts for use in JS (GSAP / Three.js).
+   ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  /* Soft dark: deep navy instead of black, pastel accents kept as tints */
+  --bg: #0f1828;
+  --surface: #16223a;
+  --ink: #e7edf5;
+  --ink-soft: #9dabbf;
+  --primary: #8db2e6;
+  --pastel-blue: #1f3150;
+  --pastel-mint: #1e3b37;
+  --pastel-peach: #3b2c29;
+  --pastel-lavender: #2c2a4a;
+  --line: #243450;
+  /* Light pastel kept for glows (bird perch, cursor fill) */
+  --glow: #d6e4f5;
+
+  --content-max: 1200px;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --section-pad: clamp(6rem, 14vh, 10rem);
+  --radius-card: 20px;
+  --shadow-lift: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --nav-h: 4.5rem;
+
+  /* power3.out / expo.inOut approximations for CSS transitions */
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
+/* Expose tokens to Tailwind: bg-bg, text-ink, border-line, bg-pastel-mint, … */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-primary: var(--primary);
+  --color-pastel-blue: var(--pastel-blue);
+  --color-pastel-mint: var(--pastel-mint);
+  --color-pastel-peach: var(--pastel-peach);
+  --color-pastel-lavender: var(--pastel-lavender);
+  --color-line: var(--line);
+  --color-glow: var(--glow);
+
+  /* Bricolage has no Thai glyphs, so Thai headings fall through to Plex Thai. */
+  --font-display: var(--font-bricolage), var(--font-plex-thai), "Space Grotesk",
+    system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-thai: var(--font-plex-thai), var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --radius-card: var(--radius-card);
+  --shadow-lift: var(--shadow-lift);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100dvh;
+}
+
+/* Wide hero glyphs must never cause horizontal scroll. `clip` (not hidden)
+   keeps position: sticky working. */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Body font swaps by locale (the [locale] layout sets lang on .font-body). */
+.font-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.font-body:lang(th) {
+  font-family: var(--font-thai);
+  line-height: 1.8;
+}
+@media (min-width: 768px) {
+  .font-body {
+    font-size: 1.0625rem;
+  }
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------
+   Layout utilities
+   ------------------------------------------------------------------ */
+@utility container-x {
+  width: 100%;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-pad);
+}
+
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* Type scale */
+@utility text-hero {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 16rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+@utility text-section {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* "01 — About": small mono caps label */
+@utility text-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+@utility prose-measure {
+  max-width: 65ch;
+}
+
+/* Thai script must not be letter-spaced. */
+.text-label:lang(th) {
+  letter-spacing: 0.02em;
+}
+
+/* Visually hidden but available to screen readers */
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  &:focus-visible {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border-radius: 999px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion
+   ------------------------------------------------------------------ */
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.scroll-cue-line {
+  animation: scroll-cue 2.4s var(--ease-in-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Hero morph (see components/hero)
+   ------------------------------------------------------------------ */
+.hero-stage {
+  display: grid;
+  place-items: center;
+}
+
+.hero-word,
+.hero-name {
+  grid-area: 1 / 1;
+  font-family: var(--font-display);
+  font-variation-settings: "wght" var(--wght), "wdth" var(--wdth, 100);
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.hero-word {
+  --wght: 800;
+  display: flex;
+  font-weight: 800;
+  font-size: clamp(3rem, 17vw, 16rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.hero-name {
+  --wght: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  font-size: clamp(3rem, 12vw, 10rem);
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.hero-name-line {
+  display: flex;
+}
+/* Room for the perched bird between the two lines. */
+.hero-name-line + .hero-name-line {
+  margin-top: 0.14em;
+}
+
+.ch,
+.ch-in {
+  display: inline-block;
+  position: relative;
+}
+
+.ch-glyph {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Name + tagline start hidden; the scroll timeline reveals them. */
+.hero-name .ch,
+.hero-tagline .tg {
+  opacity: 0;
+}
+.hero-name[data-settled="true"] .ch,
+.hero-tagline[data-settled="true"] .tg {
+  opacity: 1;
+}
+.hero-word[data-settled="true"] {
+  visibility: hidden;
+}
+
+/* Pre-entrance state, set in CSS so there's no flash before JS runs. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word:not(.is-ready) .ch {
+    clip-path: inset(-20% -20% 0 -20%);
+  }
+  .hero-word:not(.is-ready) .ch-in {
+    transform: translateY(110%);
+  }
+}
+
+/* Experience timeline dot, filled once it passes mid-screen. */
+.tl-dot.is-on {
+  background: var(--primary);
+  box-shadow: 0 0 0 5px rgb(141 178 230 / 0.15);
 }

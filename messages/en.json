@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "Narongpol Chunu — Full-Stack Developer",
+    "description": "Full-Stack Developer and Computer Science student at Maejo University. Sole developer of the Action in Thai sports-event platform: race registration, real-time RFID results and GPS route maps."
+  },
+  "nav": {
+    "home": "Narongpol Chunu — home",
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "skills": "Skills",
+    "contact": "Contact",
+    "language": "Language",
+    "primary": "Primary"
+  },
+  "hero": {
+    "word": "PORTFOLIO",
+    "name": "NARONGPOL CHUNU",
+    "subtitle": "Full-Stack Developer · Chiang Mai, Thailand",
+    "tagline": "I build real-time systems that thousands of runners trust on race day.",
+    "scroll": "scroll"
+  },
+  "about": {
+    "label": "About",
+    "title": "About me",
+    "photoAlt": "Portrait of Narongpol Chunu",
+    "body": "Third-year Computer Science student at Maejo University (GPA 3.33) and the sole Full-Stack Developer at Action in Thai, where I design, build and deploy the company's entire sports-event platform on AWS EC2: race registration with automated payment verification, real-time RFID race results, and GPS/GPX route tracking. Interested in AI/ML and looking for a Full-Stack Engineering internship where I can grow inside an experienced team.",
+    "stats": {
+      "sites": "production sites",
+      "runners": "runners on the Action platform (company-wide)",
+      "joined": "year joined Action"
+    },
+    "languagesTitle": "Languages",
+    "languages": [
+      "Thai (Native)",
+      "English (Intermediate)"
+    ],
+    "educationTitle": "Education"
+  },
+  "projects": {
+    "label": "Projects",
+    "title": "Projects",
+    "live": "Live site",
+    "code": "Code",
+    "caseStudy": "Read case study",
+    "close": "Close",
+    "problem": "Problem",
+    "solution": "Solution",
+    "result": "Result",
+    "features": "Features",
+    "racetime": {
+      "title": "RACETIME — Real-time RFID Results",
+      "tag": "Real-time results platform for running events",
+      "desc": "A live timing dashboard that turns RFID chip reads into instant results the moment a runner crosses the finish line. Organizers manage events and categories; runners and spectators search by bib or name, watch leaderboards update in real time, and switch between Thai/English and light/dark themes.",
+      "problem": "Results used to be published hours after the race.",
+      "solution": "Ingest RFID reader data, compute net/gun time and rankings per category, and push updates to the browser without a refresh.",
+      "result": "Used in production for Action's events in 2026.",
+      "featureList": [
+        "Event listing",
+        "Per-event leaderboard",
+        "Category & age-group ranking",
+        "Bib / name search",
+        "Split times at checkpoints",
+        "Certificate / result sharing",
+        "Dark mode",
+        "TH / EN"
+      ]
+    },
+    "race": {
+      "title": "Race.action — Registration & Payments",
+      "tag": "Registration system with automated payment verification",
+      "desc": "End-to-end race registration: runners pick a distance and shirt size, upload a bank-transfer slip, and get verified automatically. Organizers see live registration counts, revenue and shirt-size breakdowns on a dashboard.",
+      "problem": "Manual slip checking took organizers hours per event.",
+      "solution": "Automated slip verification, a real-time dashboard and data export.",
+      "result": "Payment confirmation automated end to end.",
+      "featureList": [
+        "Distance & shirt-size selection",
+        "Bank-slip upload",
+        "Automated payment verification",
+        "Live registration dashboard",
+        "Revenue & shirt-size breakdowns",
+        "Export"
+      ]
+    },
+    "map": {
+      "title": "Action Map — GPS/GPX Route Tracking",
+      "tag": "GPS/GPX route tracking",
+      "desc": "Interactive course maps built from GPX files: runners preview elevation and checkpoints before the race; organizers publish routes for every distance.",
+      "problem": "Runners had no easy way to explore a course before race day.",
+      "solution": "Parse organizer GPX files into interactive maps with elevation and checkpoints.",
+      "result": "Every distance of every event gets a shareable course map.",
+      "featureList": [
+        "GPX import",
+        "Interactive course map",
+        "Elevation preview",
+        "Checkpoints",
+        "Routes for every distance"
+      ]
+    },
+    "peanut": {
+      "title": "Peanut Butter — Web Games Platform",
+      "tag": "Year-2 capstone · community platform for indie HTML games",
+      "desc": "Upload an HTML or ZIP game, share it with the community, and play it straight in the browser with no installs. Includes accounts, a browse page with recent games, and a sandboxed in-browser player.",
+      "problem": "Sharing small HTML games usually means asking players to download files.",
+      "solution": "Sandbox user-uploaded games in an iframe, extract ZIPs and serve them statically, with auth and upload limits.",
+      "result": "Games playable instantly in the browser, no installs.",
+      "featureList": [
+        "HTML / ZIP upload",
+        "Sandboxed in-browser player",
+        "Accounts",
+        "Recent-games browse page"
+      ]
+    },
+    "action": {
+      "title": "Action — Company Website",
+      "tag": "Marketing site for the Action sports-event platform",
+      "desc": "The public face of Action: Register, AI photo search, and live RFID results in one place. Bilingual, SEO-friendly, and tuned to load fast on mobile at race venues.",
+      "problem": "Action's products lived on separate sites with no single front door.",
+      "solution": "One bilingual, SEO-friendly hub linking registration, AI photo search and live results.",
+      "result": "A fast mobile entry point for runners at race venues.",
+      "featureList": [
+        "TH / EN",
+        "SEO",
+        "Mobile-first performance"
+      ]
+    },
+    "intro": "Production systems I designed, built and deployed — most of them used by real runners on race day.",
+    "visit": "Visit"
+  },
+  "experience": {
+    "label": "Experience",
+    "title": "Experience",
+    "present": "Present",
+    "action": {
+      "role": "Full-Stack Developer",
+      "org": "Action in Thai",
+      "period": "2026 – Present",
+      "desc": "Sole developer of all company web systems, from database schema to AWS EC2 deployment. Built race.action.in.th (registration + automated payment slip verification), live.action.in.th (real-time RFID results), map.action.in.th (GPS/GPX route tracking).",
+      "bullets": [
+        "Sole developer of all company web systems, from database to deployment on AWS EC2",
+        "Built a registration system with automated payment verification — race.action.in.th",
+        "Developed real-time RFID race results — live.action.in.th",
+        "Created a GPS/GPX route tracking platform — map.action.in.th"
+      ]
+    },
+    "csmju": {
+      "role": "Committee Member",
+      "org": "CSMJU Studio, Maejo University",
+      "period": "2024 – Present",
+      "desc": "Organized Computer Science department activities and events.",
+      "bullets": [
+        "Organized Computer Science department activities and events"
+      ]
+    },
+    "edu": {
+      "role": "B.Sc. Computer Science",
+      "org": "Maejo University",
+      "period": "2024 – Present",
+      "desc": "GPA 3.33.",
+      "bullets": [
+        "GPA 3.33"
+      ]
+    }
+  },
+  "skills": {
+    "label": "Skills",
+    "title": "Skills",
+    "groups": {
+      "languages": "Programming Languages",
+      "frontend": "Web & Frontend",
+      "backend": "Backend & Database",
+      "cloud": "Cloud & DevOps",
+      "tools": "Tools"
+    },
+    "also": "Also: Graphic design · Photography · Video editing · Drone piloting"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's build something",
+    "copyHint": "Click to copy email",
+    "copied": "Copied",
+    "based": "Based in Chiang Mai, Thailand · Open to internships",
+    "emailLabel": "Email",
+    "githubLabel": "GitHub",
+    "phoneLabel": "Phone",
+    "intro": "Open to Full-Stack internships. The fastest way to reach me is email."
+  },
+  "footer": {
+    "wordmark": "Narongpol Chunu",
+    "built": "Built with Next.js, Three.js & GSAP",
+    "top": "Back to top"
+  }
+}
